@@ -24,6 +24,7 @@ public class PhoneBook {
 
 //    adds an entry to the composite associate data type
     public void add(String name, String phoneNumber) {
+        this.phoneNumbers.add(phoneNumber);
         this.phonebook.put(name, this.phoneNumbers);
     }
 
@@ -50,7 +51,14 @@ public class PhoneBook {
 
 //    returns a name for the respective input phoneNumber
     public String reverseLookup(String phoneNumber)  {
-        return this.phonebook.get(phoneNumber).toString();
+        String name = "";
+        Set<Map.Entry<String, List<String>>> Ent = this.phonebook.entrySet();
+        for (Map.Entry<String, List<String>> entry : Ent) {
+            if (entry.getValue().contains(phoneNumber)) {
+               name = entry.getKey();
+            }
+        }
+        return name;
     }
 
 //    returns a list of all names in this PhoneBook
